@@ -1,0 +1,32 @@
+git add 工作区提交到暂存区
+git commit 暂存区提交到本地库
+
+git config --global user.name 设置用户签名——用户名
+git config --global user.email 邮箱
+这里设置的用户签名和将来登录github的账号没有关系
+
+git init 初始化本地库
+git status 查看本地库状态（红色表示还在工作区，绿色表示在暂存区，蓝色代表提交但是有改变）
+git commit -m "日志信息" 文件名
+
+git reflog 查看版本信息
+git log 查看版本详细信息
+
+版本穿梭
+git reset -hard 版本号
+
+分支操作（一个分支就是一个副本，如果某一个分支开发失败，不会对其它分支有影响）
+git branch 分支名 ：创建分支
+git branch -v     ：查看分支
+git checkout 分支名： 切换分支
+git merge 分支名：    把指定的分支合并到当前分支上
+
+团队协作机制
+跨团队：fork-> push -> pull request ->审核-> merge
+
+远程仓库
+git remote -v 查看当前所有远程地址别名
+git remote add 别名 远程地址  ：起别名
+git push 别名 分支
+git clone 远程地址
+git pull 远程地址别名 远程分支名
