@@ -6,9 +6,12 @@ git config --global user.name 设置用户签名——用户名
 git config --global user.email 邮箱
 这里设置的用户签名和将来登录github的账号没有关系
 
-撤销修改：
+管理修改：
+确保在commie 前add所有文件
+
+撤销修改：前提是文件已经commit过
 当你已经commit file后：
-你还没add：git checkout -- file
+你还没add：git checkout -- file      git restore
 你已经add：git reset HEAD <file> 将文件暂存区撤销，再通过git checkout -- file撤销
 若已经commit：参考版本穿梭
 
@@ -27,7 +30,7 @@ git log --pretty=oneline --abbrev-commit  找到历史提交的commit id
 版本穿梭
 git reset -hard 版本号
 穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
-要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。当你版本回退了 缺后悔了 可以用这个看
 
 分支操作（一个分支就是一个副本，如果某一个分支开发失败，不会对其它分支有影响）
 Git鼓励大量使用分支：
