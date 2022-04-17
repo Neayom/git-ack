@@ -9,7 +9,7 @@ git config --global user.email 邮箱
 撤销修改：
 当你已经commit file后：
 你还没add：git checkout -- file
-你已经add：git reset HEAD <file> 将文件撤销到暂存区，再通过git checkout -- file撤销
+你已经add：git reset HEAD <file> 将文件暂存区撤销，再通过git checkout -- file撤销
 若已经commit：参考版本穿梭
 
 git init 初始化本地库
@@ -22,6 +22,7 @@ git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新�
 git reflog 查看版本信息
 git log 查看版本详细信息
 git log --pretty=oneline :简短信息
+git log --pretty=oneline --abbrev-commit  找到历史提交的commit id
 
 版本穿梭
 git reset -hard 版本号
@@ -43,6 +44,29 @@ master有bug 但是你当前在dev环节开发，只是add 并未commit，此时
 在issue-1分支下处理完bug后，切换到master 合并并删除issue-1 ：git merge --no-ff -m "merge with no-ff" dev   git branch issue-1
 接着回到dev干活：git switch dev，并利用git stash pop还原现场
 dev也是master的分支，master有bug dev也应该有：在master分支上修复的bug，想要合并到当前dev分支，可以用git cherry-pick <commit>命令，把bug提交的修改“复制”到当前分支，避免重复劳动，其中commit是issue-1 提交的id
+
+多人协作：
+git remote 查看远程库信息
+git remote -v 查看当前所有远程地址别名
+git checkout -b branch-name origin/branch-name：本地创建新分支并与远程相关联，本地和远程分支最好相同
+git push origin master:将当前master分支推送到origin远程库中
+
+git打标签：
+1.切换到打标签的分支上
+2.git tag <name> 将当前分支的最新提交打上名字为<name>的分支
+3.git tag 查看当前所有分支
+4.现在周五了，周一的提交某个分支需要打上标签做法：
+（1） git log --pretty=oneline --abbrev-commit 查看历史commit id
+（2）git tag v0.9（name） f52c633（commit id）
+5.创建有说明的标签：git tag -a v0.1 -m "version 0.1 released" 1094adb  用-a指定标签名，-m指定说明文字：
+标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。
+
+6.删除标签：git tag -d v0.1
+7.推送标签到远程：git push origin v1.0
+8.一次性的推送所有标签：git push origin --tags
+9.删除远程标签：
+（1）先从本地删除：git tag -d v0.9 
+（2）然后，从远程删除。删除命令也是push，但是格式如下：git push origin :refs/tags/v0.9
 
 团队协作机制
 跨团队：fork-> push -> pull request ->审核-> merge
